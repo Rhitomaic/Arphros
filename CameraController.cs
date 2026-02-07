@@ -5,7 +5,6 @@ namespace Arphros;
 
 public class CameraController : Behaviour
 {
-    public Transform Transform = new();
     public Transform? Target;
 
     public Vector3 PivotOffset = Vector3.Zero;
@@ -34,13 +33,13 @@ public class CameraController : Behaviour
             SmoothFactor * dt
         );
 
-        Transform.LocalRotation = TargetRotation;
+        Transform.LocalEulerAngles = TargetRotation;
     }
 
     public Camera3D GetCamera()
     {
         Vector3 forward =
-            Game.ForwardFromRotation(Transform.LocalRotation);
+            Game.ForwardFromRotation(Transform.LocalEulerAngles);
 
         Vector3 cameraPos =
             Transform.LocalPosition - forward * TargetDistance;
